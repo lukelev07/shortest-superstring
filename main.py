@@ -1,6 +1,7 @@
 __author__ = 'Luke Levis'
 
 import networkx as nx
+import sys
 
 
 def overlap(a, b):
@@ -42,6 +43,20 @@ def string_regen(graph):
     """
     # change this line.
     return 0
+
+
+def main():
+    # build list of input vertices and call methods
+    list = []
+    graph = make_graph(list)
+    result = string_regen(graph)
+
+    # write file
+    file = open("output.txt", "w")
+    file.write(result)
+
+if __name__ == "__main__":
+    main()
 
 
 
