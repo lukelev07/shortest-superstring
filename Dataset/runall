@@ -4,21 +4,16 @@
 # For instance, if your program can be run with 'python code/assemble.py',
 # you could run ./runall python code/assemble.py
 
+for i in 1 2 3 4 5
+do
+    echo Running on reads${i}.txt...
+    $* < reads${i}.txt > output${i}.txt
+    echo Comparing your output${i}.txt to the correct answer....
+    cmp output${i}.txt answer${i}.txt && echo output${i}.txt looks good
+done
 
-$* < reads1.txt > output1.txt
-$* < reads2.txt > output2.txt
-$* < reads3.txt > output3.txt
-$* < reads4.txt > output4.txt
-$* < reads5.txt > output5.txt
-$* < reads6.txt > output6.txt
-$* < reads7.txt > output7.txt
-$* < reads8.txt > output8.txt
-$* < reads9.txt > output9.txt
-$* < reads10.txt > output10.txt
-
-echo Comparing your output to the correct answers....
-cmp output1.txt answer1.txt && echo output1.txt looks good
-cmp output2.txt answer2.txt && echo output2.txt looks good
-cmp output3.txt answer3.txt && echo output3.txt looks good
-cmp output4.txt answer4.txt && echo output4.txt looks good
-cmp output5.txt answer5.txt && echo output5.txt looks good
+for i in 6 7 8 9 10 11 12 13 14 15 16
+do
+    echo Running on reads${i}.txt...
+    $* < reads${i}.txt > output${i}.txt
+done
