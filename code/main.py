@@ -2,6 +2,7 @@ __author__ = 'Luke Levis'
 
 import itertools
 import sys
+from heapq import heappop, heappush
 
 
 # def overlap(a, b):
@@ -37,17 +38,13 @@ def overlap(text1, text2):
 
 
 def make_pairs(words):
-    tup = []
-    pair_obj = itertools.permutations(words, 2)
-    for i in pair_obj:
-        tup.append(i)
-    return tup
+    return [j for j in itertools.permutations(words, 2)]
 
 
 def most_overlap(param):
     """Returns the pair that overlaps the most; will break ties by picking arbitrarily.
     """
-    to_return = (0,())
+    to_return = (0, ())
     for pair in param:
         lap = overlap(pair[0], pair[1])
         if lap < to_return[0]:
@@ -59,21 +56,23 @@ def merge_two(a, b, amount):
     return a + b[amount:]
 
 
-def remove_subs(words):
-    l = words
-    return [j for i, j in enumerate(l) if all(j not in k for k in l[i + 1:])]
+def remove_subs(l):
+    l = sorted(l, key=len)
+    return [r for i, r in enumerate(l) if all(r not in k for k in l[i + 1:])]
 
 
 reads = sys.stdin.read().splitlines()
 reads = remove_subs(reads)
+heap = []
+pairs = [j for j in itertools.permutations(reads, 2)]
 while len(reads) > 1:
-    pairs = make_pairs(reads)
+    pairs = [j for j in itertools.permutations(reads, 2)]
     min_item = most_overlap(pairs)
     new_substring = merge_two(min_item[1][0], min_item[1][1], -min_item[0])
     reads.append(new_substring)
     reads.remove(min_item[1][0])
     reads.remove(min_item[1][1])
-    if len(reads)%5 == 0:
+    if len(reads) % 5 == 0:
         reads = remove_subs(reads)
 answer = "".join(reads)
 print answer
