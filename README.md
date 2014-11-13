@@ -1,4 +1,4 @@
-hw9
+Shortest SuperString
 ===
 
 My implementation of the DNA sequencing problem.
